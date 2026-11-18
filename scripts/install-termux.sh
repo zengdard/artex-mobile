@@ -10,6 +10,8 @@ SERIAL="${PT_SERIAL:-$("$ROOT/../android-bot/phone.sh" samsung 2>/dev/null || tr
 SERIAL="${SERIAL:-192.168.1.12:5555}"
 PHONE_HOME="/data/data/com.termux/files/home"
 PREFIX="/data/data/com.termux/files/usr"
+PGHOST="${ARTEX_PG_HOST:-127.0.0.1}"
+PGPORT="${ARTEX_PG_PORT:-5432}"
 REMOTE_APP="files/home/artex/app"
 VDIR="$ROOT/vendor/artex-$VERSION-linux-arm64"
 
@@ -46,8 +48,8 @@ TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
 cat >"$TMP/config.json" <<JSON
 {
   "database": {
-    "host": "127.0.0.1",
-    "port": 5432,
+    "host": "$PGHOST",
+    "port": $PGPORT,
     "user": "artex",
     "password": "artex",
     "dbname": "artex",
@@ -57,6 +59,15 @@ cat >"$TMP/config.json" <<JSON
 }
 JSON
 adb -s "$SERIAL" shell "run-as com.termux sh -c \"mkdir -p files/home/artex/app && cat > files/home/artex/app/config.json\"" <"$TMP/config.json"
+
+if [ "$PGHOST" != "127.0.0.1" ]; then
+  cat >"$TMP/artex.env" <<ENV
+ARTEX_PG_REMOTE=1
+ARTEX_PG_HOST=$PGHOST
+ARTEX_PG_PORT=$PGPORT
+ENV
+  adb -s "$SERIAL" shell "run-as com.termux sh -c \"cat > files/home/artex/artex.env\"" <"$TMP/artex.env"
+fi
 
 # --- 4. jeton GLM (OpenCode Go) pour le relais ---
 python3 - "$TMP/glm.json" <<'PY'

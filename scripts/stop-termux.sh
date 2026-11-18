@@ -14,6 +14,6 @@ rm -f "$ROOT/run/artex.pid" "$ROOT/run/relay.pid"
 echo "ARTEX arrêté."
 
 if [ "${1:-}" = "--all" ]; then
-  pg_ctl -D "$PREFIX/var/lib/postgresql" stop -m fast >/dev/null 2>&1 || true
+  "$ROOT/scripts/pg-termux.sh" stop || true
   echo "PostgreSQL arrêté."
 fi

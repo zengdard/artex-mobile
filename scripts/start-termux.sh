@@ -11,10 +11,10 @@ export TMPDIR="$PREFIX/tmp"
 export LD_LIBRARY_PATH="$PREFIX/lib"
 mkdir -p "$ROOT/logs" "$ROOT/run"
 
-PGDATA="$PREFIX/var/lib/postgresql"
-if ! pg_ctl -D "$PGDATA" status >/dev/null 2>&1; then
-  pg_ctl -D "$PGDATA" -l "$ROOT/logs/postgres.log" -o "-k $TMPDIR -h 127.0.0.1" start >/dev/null
-  sleep 2
+# Base locale (PG16 compilé) ou distante (ARTEX_PG_HOST dans artex.env).
+[ -f "$ROOT/artex.env" ] && . "$ROOT/artex.env"
+if [ "${ARTEX_PG_REMOTE:-0}" != "1" ]; then
+  "$ROOT/scripts/pg-termux.sh" start
 fi
 
 if ! curl -fsS -m 2 http://127.0.0.1:8790/health >/dev/null 2>&1; then

@@ -118,3 +118,28 @@ pkill -f glm-relay.py
 
 Ou définir `ARTEX_LLM_MODEL` avant le démarrage. Le relais réécrit `model` si le client
 n'en envoie pas ; sinon le modèle demandé par ARTEX est conservé.
+
+
+## PostgreSQL natif : limite Android 15
+
+`initdb` du PG18 Termux et du PG16 compilé se bloque à `selecting default max_connections`
+ou `running bootstrap script` : PostgreSQL crée un thread et un socketpair, et Android 15
+ne réveille pas le thread (deadlock `futex` / `read`). Ce n'est pas un problème de
+configuration.
+
+Solution testée : base **distante** sur le PC/VPS.
+
+```bash
+podman run -d --name artex-pg -p 5432:5432 \
+  -e POSTGRES_USER=artex -e POSTGRES_PASSWORD=artex -e POSTGRES_DB=artex \
+  docker.io/postgis/postgis:16-3.4
+
+ARTEX_PG_HOST=192.168.1.41 ./install.sh termux
+```
+
+Le script écrit `~/artex/artex.env` (`ARTEX_PG_REMOTE=1`, hôte, port) et pointe
+`app/config.json` vers cette base. Vérifier depuis Termux :
+
+```bash
+PGPASSWORD=artex psql -h 192.168.1.41 -U artex -d artex -c 'select 1'
+```

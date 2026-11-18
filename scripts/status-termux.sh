@@ -7,9 +7,10 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
 export PATH="$PREFIX/bin:$PATH"
 
-echo "PostgreSQL : $(pg_ctl -D "$PREFIX/var/lib/postgresql" status >/dev/null 2>&1 && echo actif || echo arrêté)"
+echo -n "PostgreSQL : "
+"$ROOT/scripts/pg-termux.sh" status 2>/dev/null || true
 echo -n "Base artex : "
-psql -h 127.0.0.1 -U artex -d artex -tAc "select count(*) from information_schema.tables where table_schema='public'" 2>/dev/null \
+"$PREFIX/opt/pg16/bin/psql" -h 127.0.0.1 -U artex -d artex -tAc "select count(*) from information_schema.tables where table_schema='public'" 2>/dev/null \
   | sed 's/^/tables=/;s/$//' || echo "inaccessible"
 echo -n "Relais GLM : "
 curl -fsS -m 2 http://127.0.0.1:8790/health 2>/dev/null && echo " actif" || echo "arrêté"

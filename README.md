@@ -87,12 +87,34 @@ python3 scripts/glm-relay.py &          # http://127.0.0.1:8790/v1
 ```
 (sur Linux, ajouter `extra_hosts: ["host.docker.internal:host-gateway"]` au service `artex`).
 
+## Base de données : locale ou distante
+
+Sur Android 15, PostgreSQL **natif** (18 du dépôt Termux, et 16 compilé) se bloque au
+bootstrap (`postgres --boot`) à cause d'un deadlock thread/socket de la plateforme.
+Deux options :
+
+1. **PostgreSQL distant** (recommandé, testé) — PC, VPS ou conteneur :
+   ```bash
+   # sur le PC
+   podman run -d --name artex-pg -p 5432:5432 \
+     -e POSTGRES_USER=artex -e POSTGRES_PASSWORD=artex -e POSTGRES_DB=artex \
+     docker.io/postgis/postgis:16-3.4
+
+   # sur le PC, déploiement vers le téléphone
+   ARTEX_PG_HOST=192.168.1.41 ./install.sh termux
+   ```
+   ARTEX (UI, agents, relais) reste sur le téléphone ; seule la base est distante.
+2. **PostgreSQL local** — `scripts/build-pg16.sh` compile PG16 et applique les patches
+   Termux (`shm_open`, `syncfs`, `sync_file_range`). Le binaire se construit, mais
+   l'initialisation peut encore deadlocker selon la version d'Android. À réserver aux
+   appareils où `initdb` passe.
+
 ## Architecture sur le téléphone
 
 ```
 ┌──────────────────────────── Termux (u0_a231) ────────────────────────────┐
 │                                                                          │
-│  ARTEX (Go arm64)  :8787  ──►  PostgreSQL 18  :5432                      │
+│  ARTEX (Go arm64)  :8787  ──►  PostgreSQL 16 (PC/VPS) :5432              │
 │         │                                                                │
 │         └──► relais OpenAI  :8790  ──►  OpenCode Go / GLM                │
 │                                                                          │
