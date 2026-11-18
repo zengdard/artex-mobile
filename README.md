@@ -74,6 +74,10 @@ OPENAI_API_KEY=sk-... ./install.sh desktop
 # ou sans clé : le script la demande
 ```
 
+Sur le Galaxy A14 (Android 15), le chemin testé est : **ARTEX natif dans Termux + PostgreSQL 16
+sur le PC + relais GLM local**. `install-termux.sh` accepte `ARTEX_PG_HOST` et écrit
+`~/artex/artex.env` ; `start-termux.sh` saute alors le PostgreSQL local.
+
 Le script écrit `upstream/.env` (mot de passe PostgreSQL généré, provider OpenAI-compatible),
 puis lance `docker compose up -d --build`. UI : <http://localhost:8787>.
 
