@@ -1,0 +1,11 @@
+vendor/
+app/
+logs/
+run/
+data/
+keys/
+*.zip
+*.log
+.env
+__pycache__/
+*.pyc

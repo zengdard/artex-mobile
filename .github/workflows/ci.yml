@@ -1,0 +1,17 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax
+        run: |
+          for f in install.sh scripts/*.sh; do bash -n "$f"; done
+      - name: Python syntax
+        run: python3 -m py_compile scripts/glm-relay.py
+      - name: No secrets
+        run: |
+          ! grep -rInE 'st_[a-f0-9]{16,}|sk-[A-Za-z0-9]{20,}' --exclude-dir=.git --exclude-dir=upstream .

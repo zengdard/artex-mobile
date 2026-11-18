@@ -1,0 +1,12 @@
+{
+  "_comment": "Copie ce fichier en app/config.json sur le téléphone. ARTEX lit la base et le dossier de skills ici ; le LLM vient des variables d'environnement du start script.",
+  "database": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "user": "artex",
+    "password": "artex",
+    "dbname": "artex",
+    "sslmode": "disable"
+  },
+  "skill_dir": "/data/data/com.termux/files/home/artex/app/skills"
+}
