@@ -14,6 +14,11 @@ rm -f "$ROOT/run/artex.pid" "$ROOT/run/relay.pid"
 echo "ARTEX arrêté."
 
 if [ "${1:-}" = "--all" ]; then
-  "$ROOT/scripts/pg-termux.sh" stop || true
-  echo "PostgreSQL arrêté."
+  [ -f "$ROOT/artex.env" ] && . "$ROOT/artex.env"
+  if [ "${ARTEX_PG_REMOTE:-0}" = "1" ]; then
+    echo "PostgreSQL distant : non arrêté."
+  else
+    "$ROOT/scripts/pg-termux.sh" stop || true
+    echo "PostgreSQL arrêté."
+  fi
 fi

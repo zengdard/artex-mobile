@@ -7,10 +7,16 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
 export PATH="$PREFIX/bin:$PATH"
 
-echo -n "PostgreSQL : "
-"$ROOT/scripts/pg-termux.sh" status 2>/dev/null || true
+[ -f "$ROOT/artex.env" ] && . "$ROOT/artex.env"
+if [ "${ARTEX_PG_REMOTE:-0}" = "1" ]; then
+  echo -n "PostgreSQL distant (${ARTEX_PG_HOST:-?}:${ARTEX_PG_PORT:-5432}) : "
+  PGPASSWORD="${ARTEX_PG_PASSWORD:-artex}" psql -h "${ARTEX_PG_HOST:-127.0.0.1}"     -p "${ARTEX_PG_PORT:-5432}" -U "${ARTEX_PG_USER:-artex}" -d "${ARTEX_PG_DB:-artex}"     -tAc "select 1" >/dev/null 2>&1 && echo "OK" || echo "inaccessible"
+else
+  echo -n "PostgreSQL : "
+  "$ROOT/scripts/pg-termux.sh" status 2>/dev/null || true
+fi
 echo -n "Base artex : "
-"$PREFIX/opt/pg16/bin/psql" -h 127.0.0.1 -U artex -d artex -tAc "select count(*) from information_schema.tables where table_schema='public'" 2>/dev/null \
+psql -h 127.0.0.1 -U artex -d artex -tAc "select count(*) from information_schema.tables where table_schema='public'" 2>/dev/null \
   | sed 's/^/tables=/;s/$//' || echo "inaccessible"
 echo -n "Relais GLM : "
 curl -fsS -m 2 http://127.0.0.1:8790/health 2>/dev/null && echo " actif" || echo "arrêté"
