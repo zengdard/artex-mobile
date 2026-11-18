@@ -136,7 +136,6 @@ artex-mobile/
 │   └── glm-relay.py
 ├── config/config.example.json
 ├── docs/TERMUX.md
-├── docs/constat-2026-11-17.md
 ├── install.sh
 └── Makefile
 ```
