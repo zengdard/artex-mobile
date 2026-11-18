@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Point d'entrée unique.
 #   ./install.sh              (dans Termux) installation mobile directe
 #   ./install.sh termux       (PC) déploiement vers le téléphone via adb

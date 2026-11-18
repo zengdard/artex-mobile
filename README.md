@@ -4,6 +4,9 @@ Déploiement **mobile dédié** d'[ARTEX](https://github.com/BaaRai/ARTEX) (pent
 multi-agents) sur un Android non rooté, **dans Termux**, avec PostgreSQL local, UI sur
 `127.0.0.1:8787` et un relais vers **OpenCode Go / GLM**.
 
+> **Projet non officiel**, non affilié ni endossé par les mainteneurs d'ARTEX.
+> Le nom « ARTEX » désigne le projet upstream et reste la propriété de ses auteurs.
+
 Le même dépôt s'installe aussi **sur ordinateur** via Docker Compose.
 
 | Mode | Commande | Cible |
@@ -116,7 +119,21 @@ applications installées** (manifeste, composants exportés, secrets), utiliser
 | Tester un service HTTP / une app web / un lab | ARTEX (dynamique) |
 
 > N'utiliser ARTEX que contre des systèmes dont tu es propriétaire ou pour lesquels tu as une
-> autorisation écrite. Licence AGPL-3.0.
+> autorisation écrite.
+
+## Licence et attribution
+
+- **ARTEX** : © ses auteurs, **AGPL-3.0**. Source upstream en submodule (`upstream/`), non
+  copiée ni modifiée ici. Voir <https://github.com/BaaRai/ARTEX>.
+- **Ce dépôt** (scripts, relais, docs) : **AGPL-3.0-or-later**, © les contributeurs.
+  Texte complet dans [`LICENSE`](LICENSE), attribution dans [`NOTICE`](NOTICE).
+- Projet **non officiel** : aucun lien d'affiliation avec les mainteneurs, pas d'usage de
+  leur logo. Le nom ARTEX reste celui du projet upstream.
+- **AGPL §13** : si tu exploites ARTEX modifié, ou un ensemble qui inclut ces scripts, comme
+  service réseau, tu dois mettre à disposition des utilisateurs le code source correspondant.
+- Les **termes additionnels** de l'upstream (usage autorisé, actions interdites,
+  responsabilité) s'appliquent à ARTEX : voir la section *License and disclaimer* du README
+  upstream. En résumé : uniquement des systèmes dont tu es propriétaire ou autorisé à tester.
 
 ## Arborescence
 
@@ -137,6 +154,8 @@ artex-mobile/
 ├── config/config.example.json
 ├── docs/TERMUX.md
 ├── install.sh
+├── NOTICE                    # attribution et portée de la licence
+├── LICENSE                   # AGPL-3.0
 └── Makefile
 ```
 

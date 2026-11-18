@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Arrête ARTEX et le relais ; PostgreSQL reste actif (--all pour l'arrêter aussi).
 set -uo pipefail
 

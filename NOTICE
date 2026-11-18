@@ -1,0 +1,46 @@
+ARTEX Mobile — NOTICE
+=====================
+
+Copyright (C) 2026 the contributors of this repository.
+
+This repository is an **unofficial deployment wrapper** for ARTEX. It is not
+endorsed by, affiliated with, or maintained by the ARTEX authors. The name
+"ARTEX" refers to the upstream project and remains the property of its authors.
+
+Upstream project
+----------------
+ARTEX — AI autonomous penetration testing system
+  English fork:  https://github.com/BaaRai/ARTEX
+  Original:      Autumn-27/ARTEX (repository no longer public)
+  License:       GNU Affero General Public License v3.0 (AGPL-3.0)
+
+The upstream source is referenced as a git submodule (`upstream/`) and is **not
+copied or modified** by this repository. No upstream source file is patched here.
+This repository adds only deployment scripts, PostgreSQL bootstrap, documentation
+and an OpenAI-compatible relay for OpenCode Go.
+
+Licensing of this repository
+----------------------------
+The original scripts and documentation in this repository are licensed under the
+GNU Affero General Public License, version 3 or (at your option) any later version
+(AGPL-3.0-or-later). The full license text is in `LICENSE`.
+
+Because this repository is distributed alongside ARTEX and is intended to run it,
+the combined deployment is treated as AGPL-3.0-compatible.
+
+Network use — AGPL section 13
+-----------------------------
+If you run a modified version of ARTEX, or a combined work that includes these
+scripts, as a network service, you must offer the Corresponding Source of the
+version you run to its users. The upstream source and this repository's source
+are publicly available at the URLs above.
+
+Upstream additional terms
+-------------------------
+The ARTEX maintainers publish additional usage terms and a disclaimer in their
+README (permitted use, prohibited actions, legal responsibility). They apply to
+ARTEX itself; see:
+  https://github.com/BaaRai/ARTEX#license-and-disclaimer
+
+In short: use ARTEX only against systems you own or are explicitly authorized to
+test. You remain responsible for complying with the law.

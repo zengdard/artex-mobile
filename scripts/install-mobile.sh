@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Installation directe d'ARTEX dans Termux (sans PC).
 #   git clone <repo> ~/artex && cd ~/artex && ./install.sh
 set -euo pipefail

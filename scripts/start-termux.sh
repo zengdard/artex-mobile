@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Démarre PostgreSQL (si besoin), le relais GLM et ARTEX.
 set -uo pipefail
 

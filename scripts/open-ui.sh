@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Ouvre l'UI ARTEX du téléphone depuis le PC (adb forward).
 set -euo pipefail
 

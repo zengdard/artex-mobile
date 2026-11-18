@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Déploie ARTEX dans Termux (Galaxy) depuis le PC, avec PostgreSQL local et
 # le relais OpenCode Go. Idempotent : relançable pour mettre à jour.
 set -euo pipefail

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Installation "ordi" : ARTEX via Docker Compose (upstream), PostgreSQL et UI inclus.
 #   ./install.sh desktop
 # Variables : OPENAI_API_KEY, ARTEX_LLM_BASE_URL, ARTEX_LLM_MODEL (ou saisie interactive).

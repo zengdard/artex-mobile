@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-or-later
 """Relais OpenAI-compatible entre ARTEX et OpenCode Go (GLM).
 
 ARTEX parle à http://127.0.0.1:8790/v1 ; ce relais ajoute l'en-tête

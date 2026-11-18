@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-or-later
 # Prépare PostgreSQL et l'arborescence ARTEX dans Termux (idempotent).
 set -euo pipefail
 

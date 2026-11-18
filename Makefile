@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 SHELL := /bin/bash
 SERIAL ?= 192.168.1.12:5555
 PREFIX := /data/data/com.termux/files/usr
