@@ -16,7 +16,10 @@ else
   "$ROOT/scripts/pg-termux.sh" status 2>/dev/null || true
 fi
 echo -n "Base artex : "
-psql -h 127.0.0.1 -U artex -d artex -tAc "select count(*) from information_schema.tables where table_schema='public'" 2>/dev/null \
+PGH="${ARTEX_PG_HOST:-127.0.0.1}"
+PGP="${ARTEX_PG_PORT:-5432}"
+PGPASSWORD="${ARTEX_PG_PASSWORD:-artex}" psql -h "$PGH" -p "$PGP" -U "${ARTEX_PG_USER:-artex}" -d "${ARTEX_PG_DB:-artex}" \
+  -tAc "select count(*) from information_schema.tables where table_schema='public'" 2>/dev/null \
   | sed 's/^/tables=/;s/$//' || echo "inaccessible"
 echo -n "Relais GLM : "
 curl -fsS -m 2 http://127.0.0.1:8790/health 2>/dev/null && echo " actif" || echo "arrêté"
