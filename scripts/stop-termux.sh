@@ -7,9 +7,10 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PREFIX="${PREFIX:-/data/data/com.termux/files/usr}"
 export PATH="$PREFIX/bin:$PATH"
 
-pkill -f "$ROOT/app/artex" 2>/dev/null || true
-pkill -f "$ROOT/app/start.sh" 2>/dev/null || true
-pkill -f "glm-relay.py" 2>/dev/null || true
+pkill -f "[a]rtex -addr" 2>/dev/null || true
+pkill -f "app/[a]rtex" 2>/dev/null || true
+pkill -f "[s]tart.sh -addr" 2>/dev/null || true
+pkill -f "[g]lm-relay.py" 2>/dev/null || true
 rm -f "$ROOT/run/artex.pid" "$ROOT/run/relay.pid"
 echo "ARTEX arrêté."
 
